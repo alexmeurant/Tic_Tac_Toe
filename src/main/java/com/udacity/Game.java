@@ -148,9 +148,37 @@ public class Game {
      * @param grid 2D array of characters representing the game board
      * @return String indicating the outcome of the game: "X wins" or "O wins" or "Tie" or "None"
      */
-    public String checkGameWinner(char [][]grid){
+    public String checkGameWinner(char [][]grid) {
         String result = "None";
         //Student code goes here ...
+
+        /* This loop checks if columns have 3 X's or 3 O's:
+           I have included the diagonals checking inside this loop for simplicity reasons */
+        for (int i = 0; i < 3; i++) {
+            if ((grid[i][0] == 'x' && grid[i][1] == 'x' && grid[i][2] == 'x') ||
+                    (grid[0][0] == 'x' && grid[1][1] == 'x' &&grid[2][2] == 'x')) {
+                result = "X wins";
+                break;
+            } else if ((grid[i][0] == 'o' && grid[i][1] == 'o' && grid[i][2] == 'o') ||
+                    (grid[0][0] == 'o' && grid[1][1] == 'o' &&grid[2][2] == 'o')) {
+                result = "O wins";
+                break;
+            }
+        }
+        // This loop checks if rows have 3 X's or 3 O's:
+        for (int j = 0; j < 3; j++) {
+            if (grid[0][j] == 'x' && grid[1][j] == 'x' && grid[2][j] == 'x') {
+                result = "X wins";
+                break;
+            } else if (grid[0][j] == 'o' && grid[1][j] == 'o' && grid[2][j] == 'o') {
+                result = "O wins";
+                break;
+            }
+        }
+        // This condition checks when there is a tie:
+        if (freeSpots == 0) {
+            result = "Tie";
+        }
         return result;
     }
 
